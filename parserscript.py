@@ -14,8 +14,9 @@ def fetch_asterisk_logs(client, searchterms):
             remotefilename = '/var/log/asterisk/' + each[:-1]
             localfilename = os.getcwd() + '\\' + each[:-1]
             ftp_client.get(remotefilename, localfilename)
-            print('Downloading file: ' + remotefilename + '\n\tLocal file @ ' + localfilename)
-            print('Parsing ' + localfilename + '...')
+            print('Downloading file: ' + remotefilename)
+            print('\tLocal file @ ' + localfilename)
+            print('\tParsing ' + localfilename + '...')
             parselogs(localfilename, searchterms)
     ftp_client.close()
 
@@ -33,8 +34,9 @@ def fetch_provisioning_logs(client, searchterms):
             remotefilename = '/var/log/' + each[:-1]
             localfilename = os.getcwd() + '\\' + each[:-1]
             ftp_client.get(remotefilename, localfilename)
-            print('Downloading file: ' + remotefilename + '\n\tLocal file @ ' + localfilename)
-            print('Parsing ' + localfilename + '...')
+            print('Downloading file: ' + remotefilename)
+            print('\tLocal file @ ' + localfilename)
+            print('\tParsing ' + localfilename + '...')
             parselogs(localfilename, searchterms)
     ftp_client.close()
 
@@ -72,8 +74,9 @@ def fetch_mail_logs(client, searchterms):
             remotefilename = '/var/mail/' + each[:-1]
             localfilename = os.getcwd() + '\\' + each[:-1]
             ftp_client.get(remotefilename, localfilename)
-            print('Downloading file: ' + remotefilename + '\n\tLocal file @ ' + localfilename)
-            print('Parsing ' + localfilename + '...')
+            print('Downloading file: ' + remotefilename)
+            print('\tLocal file @ ' + localfilename)
+            print('\tParsing ' + localfilename + '...')
             parselogs(localfilename, searchterms)
     ftp_client.close()
 
@@ -138,10 +141,10 @@ for eachhost in range(len(hostnamelist)):
 
     print("Beginning fetch...")
     fetch_asterisk_logs(client, searchlogsfor)
-    os.chdir('c:\\Users\\Wayman\\Desktop\\PBXLogs\\'+hostnamelist[eachhost])
+    os.chdir('c:\\Users\\' + os.getlogin() + '\\Desktop\\PBXLogs\\' + hostnamelist[eachhost])
     fetch_http_logs(client, searchlogsfor)
-    os.chdir('c:\\Users\\Wayman\\Desktop\\PBXLogs\\'+hostnamelist[eachhost])
+    os.chdir('c:\\Users\\' + os.getlogin() + '\\Desktop\\PBXLogs\\'+hostnamelist[eachhost])
     fetch_mail_logs(client, searchlogsfor)
-    os.chdir('c:\\Users\\Wayman\\Desktop\\PBXLogs\\'+hostnamelist[eachhost])
+    os.chdir('c:\\Users\\' + os.getlogin() + '\\Desktop\\PBXLogs\\'+hostnamelist[eachhost])
     fetch_provisioning_logs(client, searchlogsfor)
     client.close()
